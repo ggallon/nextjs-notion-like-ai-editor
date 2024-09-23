@@ -1,22 +1,22 @@
-import { SparklesIcon } from "../icons/SparklesIcon";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $createHeadingNode, $createQuoteNode } from "@lexical/rich-text";
+import { $setBlocksType } from "@lexical/selection";
+import { OPEN_FLOATING_COMPOSER_COMMAND } from "@liveblocks/react-lexical";
+import { motion } from "framer-motion";
 import {
   $createParagraphNode,
   $getSelection,
   FORMAT_TEXT_COMMAND,
 } from "lexical";
-import { BoldIcon } from "../icons/BoldIcon";
-import { OPEN_FLOATING_COMPOSER_COMMAND } from "@liveblocks/react-lexical";
-import { CommentIcon } from "../icons/CommentIcon";
-import { motion } from "framer-motion";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { MouseEventHandler, ReactNode, useCallback } from "react";
-import { $setBlocksType } from "@lexical/selection";
-import { $createHeadingNode, $createQuoteNode } from "@lexical/rich-text";
+import { type MouseEventHandler, type ReactNode, useCallback } from "react";
 import { useActiveBlock } from "../hooks/useActiveBlock";
-import { ItalicIcon } from "../icons/ItalicIcon";
-import { UnderlineIcon } from "../icons/UnderlineIcon";
-import { StrikethroughIcon } from "../icons/StrikethroughIcon";
+import { BoldIcon } from "../icons/BoldIcon";
 import { CodeIcon } from "../icons/CodeIcon";
+import { CommentIcon } from "../icons/CommentIcon";
+import { ItalicIcon } from "../icons/ItalicIcon";
+import { SparklesIcon } from "../icons/SparklesIcon";
+import { StrikethroughIcon } from "../icons/StrikethroughIcon";
+import { UnderlineIcon } from "../icons/UnderlineIcon";
 
 // Options in the toolbar's dropdown
 const DROPDOWN_OPTIONS = [
@@ -105,7 +105,7 @@ export function FloatingToolbarOptions({
         return $setBlocksType(selection, () => $createQuoteNode());
       }
     },
-    [activeBlock]
+    [activeBlock],
   );
 
   return (
@@ -126,6 +126,7 @@ export function FloatingToolbarOptions({
     >
       <div className="flex items-center justify-center gap-1">
         <button
+          type="button"
           onClick={() => {
             setState("ai");
             onOpenAi();
@@ -226,6 +227,7 @@ function ToolbarButton({
 }) {
   return (
     <button
+      type="button"
       onClick={onClick}
       className="inline-flex relative items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground w-8 h-8 data-[active]:bg-accent"
     >

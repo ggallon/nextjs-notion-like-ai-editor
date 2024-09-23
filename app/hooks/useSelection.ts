@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
-import { $getSelection, $setSelection, BaseSelection } from "lexical";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { $getSelection, $setSelection, type BaseSelection } from "lexical";
+import { useCallback, useEffect, useState } from "react";
 
 // Returns the current selection state, textContent, and a function to remove the selection
 export function useSelection() {

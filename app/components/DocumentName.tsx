@@ -1,20 +1,20 @@
 "use client";
 
-import { useMutation, useStorage } from "@liveblocks/react/suspense";
-import {
-  ChangeEvent,
-  useCallback,
-  KeyboardEvent,
-  useEffect,
-  useRef,
-} from "react";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useMutation, useStorage } from "@liveblocks/react/suspense";
 import {
   $getSelection,
   $isRangeSelection,
   COMMAND_PRIORITY_NORMAL,
   KEY_ARROW_UP_COMMAND,
 } from "lexical";
+import {
+  type ChangeEvent,
+  type KeyboardEvent,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { usePageLinks } from "../hooks/usePageLinks";
 
@@ -36,7 +36,7 @@ export function DocumentName() {
         mutate();
       }, 400);
     },
-    []
+    [],
   );
 
   useEffect(() => {
@@ -96,7 +96,7 @@ function useUpArrowAtTopListener(callback: () => void) {
         }
         return false;
       },
-      COMMAND_PRIORITY_NORMAL
+      COMMAND_PRIORITY_NORMAL,
     );
   }, [editor]);
 }

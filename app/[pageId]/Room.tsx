@@ -1,8 +1,8 @@
 "use client";
 
 import { RoomProvider } from "@liveblocks/react/suspense";
-import { ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
+import type { ReactNode } from "react";
 import { getRoomId } from "../config";
 
 export function Room({

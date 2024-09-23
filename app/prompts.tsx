@@ -1,12 +1,12 @@
-import { ReactNode } from "react";
-import { TranslateIcon } from "./icons/TranslateIcon";
-import { SpellcheckIcon } from "./icons/SpellcheckIcon";
-import { WandIcon } from "./icons/WandIcon";
-import { ShortenIcon } from "./icons/ShortenIcon";
+import type { ReactNode } from "react";
+import { ExplainIcon } from "./icons/ExplainIcon";
 import { LengthenIcon } from "./icons/LengthenIcon";
+import { ShortenIcon } from "./icons/ShortenIcon";
+import { SpellcheckIcon } from "./icons/SpellcheckIcon";
 import { StyleIcon } from "./icons/StyleIcon";
 import { SummariseIcon } from "./icons/SummariseIcon";
-import { ExplainIcon } from "./icons/ExplainIcon";
+import { TranslateIcon } from "./icons/TranslateIcon";
+import { WandIcon } from "./icons/WandIcon";
 
 type OptionChild = {
   text: string;

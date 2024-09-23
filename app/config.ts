@@ -1,4 +1,4 @@
-import { OpenAIChatModelId } from "@ai-sdk/openai/internal/dist";
+import type { OpenAIChatModelId } from "@ai-sdk/openai/internal/dist";
 
 export const aiModel: OpenAIChatModelId = "gpt-4o-mini";
 

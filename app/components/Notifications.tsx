@@ -1,22 +1,22 @@
 "use client";
 
+import { InboxNotification, InboxNotificationList } from "@liveblocks/react-ui";
 import {
+  ClientSideSuspense,
+  useDeleteAllInboxNotifications,
   useInboxNotifications,
   useMarkAllInboxNotificationsAsRead,
   useUnreadInboxNotificationsCount,
-  ClientSideSuspense,
-  useDeleteAllInboxNotifications,
 } from "@liveblocks/react/suspense";
-import { InboxNotification, InboxNotificationList } from "@liveblocks/react-ui";
-import { Loading } from "./Loading";
 import * as Dialog from "@radix-ui/react-dialog";
-import { InboxIcon } from "../icons/InboxIcon";
-import { MailReadIcon } from "../icons/MailReadIcon";
-import { MailDeleteIcon } from "../icons/MailDeleteIcon";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { InboxIcon } from "../icons/InboxIcon";
+import { MailDeleteIcon } from "../icons/MailDeleteIcon";
+import { MailReadIcon } from "../icons/MailReadIcon";
+import { Loading } from "./Loading";
 
 // Render a Radix UI dialog with notifications inside
 export function Notifications() {
@@ -80,6 +80,7 @@ function Inbox() {
       {/* Top bar with buttons */}
       <div className="flex py-1.5 px-3 border-b border-border justify-end gap-1.5 flex-0">
         <button
+          type="button"
           className="inline-flex gap-1.5 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-8 px-2 hover:bg-gray-100 text-gray-600 hover:text-gray-800"
           disabled={count === 0}
           onClick={markAllNotificationsAsRead}
@@ -88,6 +89,7 @@ function Inbox() {
           Mark all as read
         </button>
         <button
+          type="button"
           className="inline-flex gap-1.5 items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 h-8 px-2 hover:bg-gray-100 text-red-600 hover:text-red-700"
           disabled={inboxNotifications.length === 0}
           onClick={deleteAllNotifications}

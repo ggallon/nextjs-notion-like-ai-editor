@@ -1,4 +1,4 @@
-import { Liveblocks as LiveblocksNode, RoomData } from "@liveblocks/node";
+import { Liveblocks as LiveblocksNode, type RoomData } from "@liveblocks/node";
 import { nanoid } from "nanoid";
 import { getRoomId } from "../config";
 
@@ -16,7 +16,7 @@ export async function getLatestRoom() {
   return rooms.length ? (rooms[0] as TypedRoomData) : null;
 }
 
-export async function createRoom(title: string = "Untitled document") {
+export async function createRoom(title = "Untitled document") {
   const pageId = nanoid();
 
   const room = (await liveblocks.createRoom(getRoomId(pageId), {

@@ -1,5 +1,5 @@
 import React from "react";
-import { SVGAttributes } from "react";
+import type { SVGAttributes } from "react";
 
 export function BlockquoteIcon(props: SVGAttributes<SVGElement>) {
   return (
@@ -13,6 +13,8 @@ export function BlockquoteIcon(props: SVGAttributes<SVGElement>) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      role="img"
+      aria-label="Blockquote Icon"
       {...props}
     >
       <path d="M17 6H3" />

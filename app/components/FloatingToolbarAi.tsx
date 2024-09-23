@@ -1,17 +1,8 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import {
-  Fragment,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { CoreMessage } from "ai";
-import { useSelection } from "../hooks/useSelection";
-import { continueConversation } from "../actions/ai";
+import type { CoreMessage } from "ai";
 import { readStreamableValue } from "ai/rsc";
+import { Command } from "cmdk";
+import { motion } from "framer-motion";
 import {
   $createParagraphNode,
   $createTextNode,
@@ -19,24 +10,33 @@ import {
   $isRangeSelection,
   TextNode,
 } from "lexical";
+import {
+  Fragment,
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import * as React from "react";
-import { Command } from "cmdk";
-import { ReplaceIcon } from "../icons/ReplaceIcon";
-import { InsertInlineIcon } from "../icons/InsertInlineIcon";
+import { continueConversation } from "../actions/ai";
+import { useSelection } from "../hooks/useSelection";
 import { BackIcon } from "../icons/BackIcon";
-import { RestartIcon } from "../icons/RestartIcon";
+import { ContinueIcon } from "../icons/ContinueIcon";
+import { CopyIcon } from "../icons/CopyIcon";
+import { InsertInlineIcon } from "../icons/InsertInlineIcon";
+import { InsertParagraphIcon } from "../icons/InsertParagraphIcon";
 import { OptionsIcon } from "../icons/OptionsIcon";
+import { ReplaceIcon } from "../icons/ReplaceIcon";
+import { RestartIcon } from "../icons/RestartIcon";
+import { RubbishIcon } from "../icons/RubbishIcon";
+import { SparklesIcon } from "../icons/SparklesIcon";
 import {
   RESTORE_SELECTION_COMMAND,
   SAVE_SELECTION_COMMAND,
 } from "../plugins/PreserveSelectionPlugin";
-import { RubbishIcon } from "../icons/RubbishIcon";
-import { InsertParagraphIcon } from "../icons/InsertParagraphIcon";
-import { SparklesIcon } from "../icons/SparklesIcon";
-import { ContinueIcon } from "../icons/ContinueIcon";
 import { optionsGroups } from "../prompts";
-import { CopyIcon } from "../icons/CopyIcon";
-import { motion } from "framer-motion";
 
 export function FloatingToolbarAi({
   state,
@@ -53,7 +53,7 @@ export function FloatingToolbarAi({
 
   // Current state of components and
   const [aiState, setAiState] = useState<"initial" | "loading" | "complete">(
-    "initial"
+    "initial",
   );
 
   // Store all messages to and from AI
@@ -76,7 +76,7 @@ export function FloatingToolbarAi({
     return optionsGroups
       .flatMap((group) => group.options)
       .flatMap((option) =>
-        option.children ? [option, ...option.children] : [option]
+        option.children ? [option, ...option.children] : [option],
       )
       .find((option) => option.text === page);
   }, [page]);
@@ -92,8 +92,8 @@ export function FloatingToolbarAi({
       setPreviousPrompt(prompt);
 
       // Send on the user's text
-      const systemMessage = `Do not surround your answer in quote marks. Only return the answer, nothing else. The user is selecting this text: 
-            
+      const systemMessage = `Do not surround your answer in quote marks. Only return the answer, nothing else. The user is selecting this text:
+
 """
 ${textContent || ""}
 """
@@ -120,7 +120,7 @@ ${textContent || ""}
       }
       setAiState("complete");
     },
-    [textContent, setAiState]
+    [textContent, setAiState],
   );
 
   // Focus command panel on load and page change
@@ -164,6 +164,7 @@ ${textContent || ""}
             <div className="flex-grow whitespace-pre-wrap max-h-[130px] overflow-y-auto select-none relative px-3 py-2 pr-10">
               <div className="sticky w-full top-1 right-0">
                 <button
+                  type="button"
                   className="opacity-30 transition-opacity hover:opacity-60 absolute top-0 -right-8"
                   onClick={async () => {
                     if (!lastAiMessage.content) {
@@ -172,7 +173,7 @@ ${textContent || ""}
                     // Copy generated text to clipboard
                     try {
                       await navigator.clipboard.writeText(
-                        lastAiMessage.content
+                        lastAiMessage.content,
                       );
                     } catch (err) {
                       console.error("Failed to copy: ", err);
@@ -216,6 +217,7 @@ ${textContent || ""}
             disabled={aiState === "loading"}
           />
           <button
+            type="button"
             className="absolute right-0 px-2 top-0 bottom-0 disabled:opacity-50 hover:enabled:bg-gray-100 disabled:transition-opacity"
             disabled={aiState === "loading" || !input}
           >
@@ -336,7 +338,7 @@ ${textContent || ""}
                           const anchorNode = selection.anchor.getNode();
                           const paragraphNode = $createParagraphNode();
                           paragraphNode.append(
-                            $createTextNode(lastAiMessage.content)
+                            $createTextNode(lastAiMessage.content),
                           );
                           anchorNode
                             .getTopLevelElementOrThrow()
@@ -362,7 +364,7 @@ ${textContent || ""}
                         <CommandItem
                           icon={<ContinueIcon className="h-full" />}
                           onSelect={() => {
-                            submitPrompt(`Start with this text and continue. Output this text at the start: 
+                            submitPrompt(`Start with this text and continue. Output this text at the start:
 
 """
 ${lastAiMessage.content}
@@ -444,7 +446,7 @@ ${lastAiMessage.content}
                               >
                                 {option.text}
                               </CommandItem>
-                            )
+                            ),
                           )}
                         </Command.Group>
                       </Fragment>
@@ -502,7 +504,6 @@ function CommandItem({
           ) : null}
           {children}
         </div>
-        <div></div>
       </motion.div>
     </Command.Item>
   );

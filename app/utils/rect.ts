@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  */
-import { isPoint, Point } from "./point";
+import { type Point, isPoint } from "./point";
 
 type ContainsPointReturn = {
   result: boolean;
@@ -131,7 +131,7 @@ export class Rect {
     left: number,
     top: number,
     right: number,
-    bottom: number
+    bottom: number,
   ): Rect {
     return new Rect(left, top, right, bottom);
   }
@@ -140,7 +140,7 @@ export class Rect {
     left: number,
     width: number,
     top: number,
-    height: number
+    height: number,
   ): Rect {
     return new Rect(left, top, left + width, top + height);
   }

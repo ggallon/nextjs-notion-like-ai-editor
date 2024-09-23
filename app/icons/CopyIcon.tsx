@@ -1,17 +1,19 @@
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 export function CopyIcon(props: ComponentProps<"svg">) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={2}
+      strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
+      role="img"
+      aria-label="Copy Icon"
       {...props}
     >
       <rect width={14} height={14} x={8} y={8} rx={2} ry={2} />

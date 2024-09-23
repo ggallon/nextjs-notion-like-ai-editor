@@ -1,5 +1,5 @@
+import { type NextRequest, NextResponse } from "next/server";
 import { getUser } from "../../database";
-import { NextRequest, NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +13,6 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json(
     userIds.map((userId) => getUser(userId)?.info || null),
-    { status: 200 }
+    { status: 200 },
   );
 }

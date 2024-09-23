@@ -1,5 +1,5 @@
 import { Liveblocks } from "@liveblocks/node";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 import { getSession } from "../../example";
 
 // Authenticating your Liveblocks application
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
   });
 
   // Use a naming pattern to allow access to rooms with a wildcard
-  session.allow(`liveblocks:examples:*`, session.FULL_ACCESS);
+  session.allow("liveblocks:examples:*", session.FULL_ACCESS);
 
   // Authorize the user and return the result
   const { body, status } = await session.authorize();

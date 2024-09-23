@@ -1,9 +1,9 @@
 "use client";
 
 import { LiveblocksProvider } from "@liveblocks/react/suspense";
-import { ReactNode } from "react";
-import { authWithRandomUser } from "./example";
+import type { ReactNode } from "react";
 import { getRoomInfo } from "./actions/liveblocks";
+import { authWithRandomUser } from "./example";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
@@ -12,7 +12,7 @@ export function Providers({ children }: { children: ReactNode }) {
       // Get users' info from their ID
       resolveUsers={async ({ userIds }) => {
         const searchParams = new URLSearchParams(
-          userIds.map((userId) => ["userIds", userId])
+          userIds.map((userId) => ["userIds", userId]),
         );
         const response = await fetch(`/api/users?${searchParams}`);
 
@@ -26,7 +26,7 @@ export function Providers({ children }: { children: ReactNode }) {
       // Find a list of users that match the current search term
       resolveMentionSuggestions={async ({ text }) => {
         const response = await fetch(
-          `/api/users/search?text=${encodeURIComponent(text)}`
+          `/api/users/search?text=${encodeURIComponent(text)}`,
         );
 
         if (!response.ok) {

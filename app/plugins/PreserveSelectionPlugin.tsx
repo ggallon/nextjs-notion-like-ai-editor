@@ -1,14 +1,14 @@
-import { useEffect, useRef } from "react";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
   $getSelection,
+  $isRangeSelection,
   $setSelection,
   COMMAND_PRIORITY_LOW,
-  RangeSelection,
-  $isRangeSelection,
+  type LexicalCommand,
+  type RangeSelection,
   createCommand,
-  LexicalCommand,
 } from "lexical";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useEffect, useRef } from "react";
 
 export const SAVE_SELECTION_COMMAND: LexicalCommand<null> = createCommand();
 export const RESTORE_SELECTION_COMMAND: LexicalCommand<null> = createCommand();
@@ -37,13 +37,13 @@ export function PreserveSelectionPlugin() {
     const unregisterSaveCommand = editor.registerCommand(
       SAVE_SELECTION_COMMAND,
       saveSelection,
-      COMMAND_PRIORITY_LOW
+      COMMAND_PRIORITY_LOW,
     );
 
     const unregisterRestoreCommand = editor.registerCommand(
       RESTORE_SELECTION_COMMAND,
       restoreSelection,
-      COMMAND_PRIORITY_LOW
+      COMMAND_PRIORITY_LOW,
     );
 
     return () => {

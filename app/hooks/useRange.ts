@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import {
   $getSelection,
   $isRangeSelection,
   $isTextNode,
-  LexicalEditor,
-  LexicalNode,
+  type LexicalEditor,
+  type LexicalNode,
 } from "lexical";
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useEffect, useRef, useState } from "react";
 
 // Return the current selection range
 export function useRange() {
@@ -34,7 +34,7 @@ export function useRange() {
           anchor.getNode(),
           anchor.offset,
           focus.getNode(),
-          focus.offset
+          focus.offset,
         );
 
         setRange(range);
@@ -107,7 +107,7 @@ function createDOMRange(
   anchorNode: LexicalNode,
   _anchorOffset: number,
   focusNode: LexicalNode,
-  _focusOffset: number
+  _focusOffset: number,
 ): Range | null {
   const anchorKey = anchorNode.getKey();
   const focusKey = focusNode.getKey();

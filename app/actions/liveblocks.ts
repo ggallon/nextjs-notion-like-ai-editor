@@ -1,20 +1,20 @@
 "use server";
 
-import {
-  createRoom,
-  getRooms,
-  getRoomTitle,
-  liveblocks,
-  RoomInfo,
-  TypedRoomDataWithInfo,
-} from "../utils/liveblocks";
-import { getPageUrl } from "../config";
-import { withLexicalDocument } from "@liveblocks/node-lexical";
-import { $convertFromMarkdownString, TRANSFORMERS } from "@lexical/markdown";
 import { CodeNode } from "@lexical/code";
 import { LinkNode } from "@lexical/link";
 import { ListItemNode, ListNode } from "@lexical/list";
+import { $convertFromMarkdownString, TRANSFORMERS } from "@lexical/markdown";
 import { HeadingNode, QuoteNode } from "@lexical/rich-text";
+import { withLexicalDocument } from "@liveblocks/node-lexical";
+import { getPageUrl } from "../config";
+import {
+  type RoomInfo,
+  type TypedRoomDataWithInfo,
+  createRoom,
+  getRoomTitle,
+  getRooms,
+  liveblocks,
+} from "../utils/liveblocks";
 
 export async function getRoomInfo(roomIds: string[]): Promise<RoomInfo[]> {
   const promises = [];
@@ -33,7 +33,7 @@ export async function getRoomInfo(roomIds: string[]): Promise<RoomInfo[]> {
 
 export async function createRoomWithLexicalDocument(
   markdown: string,
-  title?: string
+  title?: string,
 ) {
   const room = await createRoom(title);
 
@@ -54,7 +54,7 @@ export async function createRoomWithLexicalDocument(
       await doc.update(() => {
         $convertFromMarkdownString(markdown, TRANSFORMERS);
       });
-    }
+    },
   );
 
   return room;

@@ -1,8 +1,8 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { useCallback, useSyncExternalStore } from "react";
-import { $getSelection, $isRangeSelection, $isRootOrShadowRoot } from "lexical";
-import { $findMatchingParent } from "@lexical/utils";
 import { $isHeadingNode } from "@lexical/rich-text";
+import { $findMatchingParent } from "@lexical/utils";
+import { $getSelection, $isRangeSelection, $isRootOrShadowRoot } from "lexical";
+import { useCallback, useSyncExternalStore } from "react";
 
 export function useActiveBlock() {
   const [editor] = useLexicalComposerContext();
@@ -11,7 +11,7 @@ export function useActiveBlock() {
     (onStoreChange: () => void) => {
       return editor.registerUpdateListener(onStoreChange);
     },
-    [editor]
+    [editor],
   );
 
   const getSnapshot = useCallback(() => {

@@ -1,8 +1,8 @@
 "use server";
 
-import { createStreamableValue } from "ai/rsc";
-import { CoreMessage, streamText } from "ai";
 import { openai } from "@ai-sdk/openai";
+import { type CoreMessage, streamText } from "ai";
+import { createStreamableValue } from "ai/rsc";
 import { aiModel } from "../config";
 
 // Send messages to AI and stream a result back

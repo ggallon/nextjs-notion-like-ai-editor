@@ -1,7 +1,7 @@
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import useSWRInfinite from "swr/infinite";
 import { getRoomsAndInfo } from "../actions/liveblocks";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 
 const PAGE_LOAD_COUNT = 10; // Load 10 pages at a time
 const INITIAL_PAGE_MULTIPLIER = 1; // Load 1 set of pages at start
@@ -45,7 +45,7 @@ export function usePageLinks() {
     {
       refreshInterval: REFRESH_TIME_MS,
       initialSize: INITIAL_PAGE_MULTIPLIER,
-    }
+    },
   );
 
   const isLoadingMore =

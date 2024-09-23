@@ -1,12 +1,12 @@
-import { Notifications } from "./Notifications";
-import { Logo } from "./Logo";
-import { createRoom } from "../utils/liveblocks";
 import { redirect } from "next/navigation";
-import { CreateIcon } from "../icons/CreateIcon";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { getPageUrl } from "../config";
-import { PageLinks } from "./PageLinks";
+import { CreateIcon } from "../icons/CreateIcon";
+import { createRoom } from "../utils/liveblocks";
 import { CreateWithAiLink } from "./CreateWithAiLink";
+import { Logo } from "./Logo";
+import { Notifications } from "./Notifications";
+import { PageLinks } from "./PageLinks";
 
 export default async function DefaultLayout({
   children,
@@ -28,7 +28,7 @@ export default async function DefaultLayout({
             <Logo />
           </div>
           <form action={create} className="flex items-center">
-            <button>
+            <button type="submit">
               <span className="sr-only">Create new page</span>
               <CreateIcon className="w-4 h-4" />
             </button>

@@ -1,6 +1,3 @@
-import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import {
   autoUpdate,
   hide,
@@ -10,9 +7,12 @@ import {
   size,
   useFloating,
 } from "@floating-ui/react-dom";
-import { FloatingToolbarAi } from "./FloatingToolbarAi";
-import { useRange } from "../hooks/useRange";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { useMouseListener } from "../hooks/useMouseListener";
+import { useRange } from "../hooks/useRange";
+import { FloatingToolbarAi } from "./FloatingToolbarAi";
 import { FloatingToolbarOptions } from "./FloatingToolbarOptions";
 
 const MARGIN_X = 32;
@@ -67,7 +67,7 @@ export function FloatingToolbar() {
     setTimeout(() => {
       setTimeout(() => {
         setCreatingMouseSelection(
-          rangeRef.current === null && mouse === "down"
+          rangeRef.current === null && mouse === "down",
         );
       });
     });
@@ -103,7 +103,7 @@ export function FloatingToolbar() {
     >
       <ToolbarOptions setFullWidth={setFullWidth} />
     </div>,
-    document.body
+    document.body,
   );
 }
 

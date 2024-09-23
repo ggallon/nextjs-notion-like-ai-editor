@@ -1,4 +1,4 @@
-import { ComponentProps } from "react";
+import type { ComponentProps } from "react";
 
 export function SpellcheckIcon(props: ComponentProps<"svg">) {
   return (

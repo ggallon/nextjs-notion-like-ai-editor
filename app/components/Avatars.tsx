@@ -1,7 +1,7 @@
 "use client";
 
-import { useOthers, useSelf } from "@liveblocks/react/suspense";
 import { ClientSideSuspense } from "@liveblocks/react";
+import { useOthers, useSelf } from "@liveblocks/react/suspense";
 
 export function Avatars() {
   return (

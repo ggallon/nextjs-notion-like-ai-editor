@@ -1,4 +1,4 @@
-import { getUser, getRandomUser } from "./database";
+import { getRandomUser, getUser } from "./database";
 
 /**
  * These utilities are used when deploying an example on liveblocks.io.

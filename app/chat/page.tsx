@@ -1,17 +1,17 @@
 "use client";
 
+import { ClientSideSuspense } from "@liveblocks/react";
+import type { Message } from "ai";
 import { useChat } from "ai/react";
+import Markdown from "markdown-to-jsx";
+import { useRouter } from "next/navigation";
+import * as React from "react";
+import { type FormEvent, useCallback, useEffect, useState } from "react";
 import { createRoomWithLexicalDocument } from "../actions/liveblocks";
 import { getPageUrl } from "../config";
-import Markdown from "markdown-to-jsx";
-import { SparklesIcon } from "../icons/SparklesIcon";
-import * as React from "react";
-import { Message } from "ai";
-import { FormEvent, useCallback, useEffect, useState } from "react";
 import { CreateIcon } from "../icons/CreateIcon";
-import { ClientSideSuspense } from "@liveblocks/react";
+import { SparklesIcon } from "../icons/SparklesIcon";
 import { StopIcon } from "../icons/StopIcon";
-import { useRouter } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
@@ -62,6 +62,7 @@ function Chat() {
             autoFocus={true}
           />
           <button
+            type="submit"
             className="absolute right-0 px-2 top-0 bottom-0 transition-colors rounded-r-lg border border-transparent hover:border-gray-200 hover:disabled:border-transparent hover:bg-gray-100 hover:disabled:bg-transparent"
             onClick={isLoading ? stop : undefined}
             disabled={!isLoading && !input}
@@ -77,8 +78,6 @@ function Chat() {
           </button>
         </div>
       </form>
-
-      <LiveblocksBadge />
     </div>
   );
 }
@@ -109,11 +108,12 @@ function MessageLine({ message }: { message: Message }) {
       setLoading(true);
       const room = await createRoomWithLexicalDocument(
         content,
-        title || "Untitled document"
+        title || "Untitled document",
       );
+      console.log("getPageUrl(room.id)", getPageUrl(room.id));
       router.push(getPageUrl(room.id));
     },
-    [content, title]
+    [content, title, router.push],
   );
 
   return (
@@ -132,6 +132,7 @@ function MessageLine({ message }: { message: Message }) {
                 <span>{title}</span>
                 <form onSubmit={handleSubmit}>
                   <button
+                    type="submit"
                     disabled={loading}
                     className="font-normal text-gray-500 hover:text-gray-700 hover:bg-gray-100 disabled:hover:text-gray-500 disabled:hover:bg-transparent transition-colors rounded-lg py-1 px-1.5 flex gap-1 items-center disabled:opacity-70"
                   >
@@ -150,6 +151,7 @@ function MessageLine({ message }: { message: Message }) {
 
           <form onSubmit={handleSubmit}>
             <button
+              type="submit"
               disabled={loading}
               className="bg-gray-100 hover:bg-gray-200 transition-colors rounded-full py-1.5 px-3 flex gap-1.5 items-center disabled:opacity-70 hover:disabled:bg-gray-100"
             >
@@ -160,28 +162,5 @@ function MessageLine({ message }: { message: Message }) {
         </div>
       )}
     </div>
-  );
-}
-
-function LiveblocksBadge() {
-  return (
-    <a
-      className="fixed top-4 right-4"
-      href="https://liveblocks.io"
-      rel="noreferrer"
-      target="_blank"
-    >
-      <picture>
-        <source
-          srcSet="https://liveblocks.io/badge-dark.svg"
-          media="(prefers-color-scheme: dark)"
-        />
-        <img
-          src="https://liveblocks.io/badge-light.svg"
-          alt="Made with Liveblocks"
-          className=""
-        />
-      </picture>
-    </a>
   );
 }

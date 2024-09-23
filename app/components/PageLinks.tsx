@@ -1,9 +1,9 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { TypedRoomDataWithInfo } from "../utils/liveblocks";
+import { usePathname } from "next/navigation";
 import { usePageLinks } from "../hooks/usePageLinks";
+import type { TypedRoomDataWithInfo } from "../utils/liveblocks";
 
 // Infinitely load all pages
 export function PageLinks() {
@@ -18,11 +18,9 @@ export function PageLinks() {
   }
 
   if (isLoading) {
-    const skeletonLength = Array.from({ length: 6 });
-
     return (
       <div className="flex flex-col gap-px px-5 py-3">
-        {skeletonLength.map((_, index) => (
+        {Array.from({ length: 6 }).map((_, index) => (
           <div key={index} className="h-8 flex items-center w-full">
             <div className="bg-gray-200/60 h-5 w-40 max-w-full rounded animate-pulse" />
           </div>
@@ -48,11 +46,12 @@ export function PageLinks() {
             room={room}
             active={pathname === `/${room.metadata.pageId}`}
           />
-        ))
+        )),
       )}
 
       {!reachedEnd ? (
         <button
+          type="button"
           onClick={() => setSize(size + 1)}
           disabled={isLoadingMore}
           className="text-center py-1.5 px-3 bg-gray-200/60 transition-colors rounded text-medium text-gray-700 hover:text-gray-900 pr-2 text-sm font-medium data-[active]:bg-gray-200/80 data-[active]:text-gray-900 disabled:opacity-70 disabled:aniamte-pulse"

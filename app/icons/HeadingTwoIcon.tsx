@@ -1,5 +1,5 @@
 import React from "react";
-import { SVGAttributes } from "react";
+import type { SVGAttributes } from "react";
 
 export function HeadingTwoIcon(props: SVGAttributes<SVGElement>) {
   return (
